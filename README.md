@@ -60,6 +60,7 @@ Questions to be answered:
 4. **Is there any asymmetry as a function of their momentum?**
    - Quantify! 
    - Magnitude of total momentum calculated as: 
+
 $$
 p = \sqrt{p_x^2 + p_y^2 + p_z^2}.
 $$

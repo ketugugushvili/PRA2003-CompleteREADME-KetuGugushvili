@@ -13,12 +13,12 @@ The process includes multiple steps: reading molecule records and calculating mo
 ## Input data and file structure
 
 * Each input file represents repeated simulations of molecular species produced during combustion at high temperatures. 
-* The header contains: 
-       - event ID: ID of the experiment or simulation run 
-       - number of molecules tracked: Total number of molecules observed in this run 
-* Each row after the header gives: 
-       - 3D momentum components (px, py, pz in 10^(-23)kg m/s)
-       - an integer ID representing the molecule or isotope 
+* The header contains:
+  - event ID: ID of the experiment or simulation run
+  - number of molecules tracked: Total number of molecules observed in this run 
+* Each row after the header gives:
+  - 3D momentum components (px, py, pz in 10^(-23)kg m/s)
+  - an integer ID representing the molecule or isotope 
 
 ```text
 <event_id> <number_of_molecules>
@@ -57,7 +57,7 @@ Questions to be answered:
 1. **What are the average counts of each molecular species and their statistical uncertainties?**
 2. **Is there any asymmetry between the normal and the variant molecule?**
    - Quantify!
-3. **Is there any asymmetry as a function of their momentum?**
+4. **Is there any asymmetry as a function of their momentum?**
    - Quantify! 
    - Magnitude of total momentum calculated as: 
 $$

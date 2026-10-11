@@ -67,27 +67,25 @@ $$
 
 ## Methods
 
-The methods were developed across Weeks 2–5. Each stage builds on the previous one to answer the three research questions. The relevant Python script is identified below.
-
-### Week 2 Deliverables: Data reading and momentum calculation
+### Week 2: Data reading and momentum calculation
 
 **File:** `Week_2(1).py`
 
-The first programming exercise introduces reading a text file, extracting molecule IDs and the momentum components, converting strings into numerical values, and calculating the magnitude of momentum:
+The Week 2 code reads a text file, selects molecule IDs and the momentum components, converts strings into numerical values, and calculates the magnitude of momentum:
 
 $$
 p = \sqrt{p_x^2 + p_y^2 + p_z^2}.
 $$
 
-The script prints a table with the molecule ID and its calculated momentum. This establishes the data-reading and momentum calculations used again in the later analysis.
+The results are displayed in a table of the molecule ID and its calculated momentum.
 
 **Current limitation:** This introductory script skips the first header and expects all following lines to contain four molecule fields. It needs a more general event parser to work with files containing additional headers.
 
-### Week 3 Deliverables: Average molecule frequency and Poisson uncertainty
+### Week 3: Average molecule frequency and Poisson uncertainty
 
 **File:** `Week_3(2).py`
 
-The program asks the user for an input filename, selects the twelve molecule IDs of interest, counts their occurrences, and calculates the average number of molecules per event and its Poisson statistical uncertainty. The results are printed in a table for all twelve species.
+The Week 3 code asks the user for an input filename, selects the 12 molecule IDs of interest, counts their occurrences, and calculates the average number of molecules per event and its Poisson statistical uncertainty. 
 
 For molecule ID $m$:
 
@@ -103,13 +101,15 @@ $$
 \sigma_{\bar N_m} = \frac{\sqrt{N_m}}{N_{\mathrm{events}}}.
 $$
 
+The results for each of the 12 molecule IDs are displayed in the table. 
+
 The script includes filename input, protection against empty input, and handling for missing files and file-access errors. **Current limitation:** The uploaded version counts events containing molecule records, rather than counting all event headers, so empty events may be missed. This should be corrected and checked against reference event totals.
 
-### Week 4 Deliverables: Subsampling and overall molecule-pair asymmetry 
+### Week 4: Subsampling and overall molecule-pair asymmetry 
 
 **File:** `Week_4(3).py` (also includes the Week 5 analysis)
 
-The deliverable of Week 4 is to calculate the average number of each of the 12 molecule IDs per event. The entire sample of the 10 files should be analysed as sub-samples, separately, and be assigned statistical uncertainty from the spread of the results.  
+The Week 4 code calculates the average number of each of the 12 molecule IDs per event. The entire sample of the 10 files is analysed as sub-samples, separately, and assigned statistical uncertainty from the spread of the results.  
 
 The analysis also questions whether there is evidence of an asymmetry between each molecule pair by calculating their mean differences:
 - 211 and -211
@@ -120,60 +120,54 @@ The analysis also questions whether there is evidence of an asymmetry between ea
 - 3334 and -3334
 
 #### Combining the ten subsamples
+ 
+* For each sub-sample, the code counts the number of molecules associated with each of the 12 IDs, and calculates the average number of molecules per event. 
 
-The entire dataset was analysed as 10 separate sub-samples. 
-For each sub-sample, the number of molecules associated with each of the 12 IDs was counted, and the average number of molecules per event was calculated. 
-
-* The results from the sub-samples were then combined using a weighted average `np.average(values, weights=weights)`
+* Then, it combines the results from the sub-samples using a weighted average `np.average(values, weights=weights)`:
   
 $$
 \bar N_m = \frac{\sum_{i=1}^{K} n_i\bar N_{m,i}}{\sum_{i=1}^{K}n_i}, \qquad K=10,
 $$
 
-* The events number($n_i$) in each sub-sample($i$) was used as the weight 
-       - This was done to increase the contribution to the final average 
-       of sub-samples with more events proportionally. 
+* The events number($n_i$) in each sub-sample($i$) is used as the weight 
+       - This is done to increase the contribution to the final average  of sub-samples with more events proportionally. 
        - In case the number of events is the same in all sub-samples, the weighted average is the same as the standard average. 
-
 
 #### Statistical uncertainty
 
-* To calculate statistical uncertainty, the sub-sampling method was used.
+* The program uses the sub-sampling method to calculate statistical uncertainty.
 
-* For each sub-sample, the average number of molecules per event was calculated.
-* Then, the **sample standard deviation** was calculated, representing the spread of these results with `np.std(values, ddof=1)`
-
+* For each sub-sample, the average number of molecules per event is calculated.
+* Then, statistical uncertainty is calculated as the **sample standard deviation**, representing the spread of these results with `np.std(values, ddof=1)`:
+  
 $$
 s_m = \sqrt{\frac{1}{K-1}\sum_{i=1}^{K}\left(\bar N_{m,i}-\langle\bar N_m\rangle\right)^2}.
 $$
 
-* This standard deviation was used as the statistical uncertainty of the analysis.
-
-The full dataset is divided into ten subsamples. Each file is analysed separately to obtain an average frequency per event for each molecule. The results are then combined, and the spread between subsamples is used to describe statistical uncertainty.
-
 #### Molecule-Pair Asymmetry Analysis
 
-* To determine if a molecule was asymmetric to its ID pair or not, the difference between their averages was calculated for each sample:
+* To determine if a molecule was asymmetric to its ID pair or not, the difference between their averages is calculated for each sample:
 
 $$
 D_i = \bar N_{+,i}-\bar N_{-,i}.
 $$
 
-The overall difference is the event-weighted mean of these differences. Its uncertainty is the sample standard deviation of the ten paired differences:
+* The overall difference is the event-weighted mean of these differences. Its uncertainty is the sample standard deviation of the ten paired differences:
 
 $$
 \sigma_D = SD(D_1,D_2,\ldots,D_K).
 $$
 
-* To further assess the importance of these differences, the absolute average difference was divided by its statistical uncertainty:
-   - `|difference| / uncertainty` (in this file, this ratio will be referenced as significance)
+* To further assess the importance of these differences, the absolute average difference is divided by its statistical uncertainty:
+   - `|difference| / uncertainty` (in this file, this ratio will be referenced as significance) DAAMATE CORRELATION
+
 $$
 R=\frac{|\bar D|}{\sigma_D}.
 $$
 
 * This ratio represents how large the observed difference is compared to the statistical variation between the subsamples. 
 * A larger ratio means that the observed difference is large compared with the subsample spread, therefore significant.
-   - This ratio was used in this analysis as a descriptive measure to support the asymmetry comparison. 
+   - This ratio was used in this analysis as a descriptive measure to support the asymmetry comparison. DAAMATE SIGMA DIFFERENCE 
 
 ### Week 5 Deliverables: Momentum-dependent asymmetry 
 
@@ -221,45 +215,40 @@ The momentum-bin mean is currently equally weighted across subsamples, while the
 
 The script is designed to generate one plot per pair, named `momentum_asymmetry_<positiveID>_<negativeID>.png`. Once the corrected code has been run and checked, the plots can be added here. A single unusual bin among twenty does not automatically establish a momentum-dependent effect.
 
+## Results and interpretation
 
-
-## Average Number of Molecules per Event
+### Average Number of Molecules per Event
 
 The results obtained from the complete sample are:
 
--------------*----------------------*---------------------------
-Molecule ID  | Average per event    | Statistical uncertainty
--------------*----------------------*---------------------------
-211          | 19.94950794          | 0.03274619
--211         | 19.91721122          | 0.03187334
-321          | 2.50914781           | 0.00477369
--321         | 2.50345680           | 0.00550369
-2212         | 1.20803410           | 0.00189633
--2212        | 1.18416095           | 0.00241216
-3122         | 0.27659851           | 0.00107440
--3122        | 0.27169595           | 0.00098538
-3312         | 0.03944116           | 0.00028368
--3312        | 0.03900049           | 0.00040248
-3334         | 0.00118710           | 0.00004168
--3334        | 0.00115158           | 0.00005079
+| Molecule ID | Average per event | Statistical uncertainty |
+|---:|---:|---:|
+| 211 | 19.94950794 | 0.03274619 |
+| -211 | 19.91721122 | 0.03187334 |
+| 321 | 2.50914781 | 0.00477369 |
+| -321 | 2.50345680 | 0.00550369 |
+| 2212 | 1.20803410 | 0.00189633 |
+| -2212 | 1.18416095 | 0.00241216 |
+| 3122 | 0.27659851 | 0.00107440 |
+| -3122 | 0.27169595 | 0.00098538 |
+| 3312 | 0.03944116 | 0.00028368 |
+| -3312 | 0.03900049 | 0.00040248 |
+| 3334 | 0.00118710 | 0.00004168 |
+| -3334 | 0.00115158 | 0.00005079 |
+
+| Molecule pair | Average difference per event | Statistical Uncertainty | Significance |
+|---|---:|---:|---:|
+| 211 vs -211 | 0.03229671 | 0.00451870 | 7.15 |
+| 321 vs -321 | 0.00569100 | 0.00329367 | 1.73 |
+| 2212 vs -2212 | 0.02387314 | 0.00237277 | 10.06 |
+| 3122 vs -3122 | 0.00490256 | 0.00058316 | 8.41 |
+| 3312 vs -3312 | 0.00044067 | 0.00048793 | 0.90 |
+| 3334 vs -3334 | 0.00003551 | 0.00006854 | 0.52 |
 
 
---------------*----------------------*--------------------*---------------
- Asymmetry Between Molecule Pairs 
---------------*----------------------*--------------------*---------------
-  Pair        |  Average difference  |  Uncertainty       |  Significance  
---------------*----------------------*--------------------*---------------
- 211 vs -211  |           0.03229671 |         0.00451870 |         7.15
- 321 vs -321  |           0.00569100 |         0.00329367 |         1.73
-2212 vs -2212 |           0.02387314 |         0.00237277 |         10.06
-3122 vs -3122 |           0.00490256 |         0.00058316 |         8.41
-3312 vs -3312 |           0.00044067 |         0.00048793 |         0.90
-3334 vs -3334 |           0.00003551 |         0.00006854 |         0.52
+### Interpretation of the Molecule Pairs
 
-
-## Interpretation of the Molecule Pairs
-
-### 211 vs -211
+#### 211 vs -211
 
 The average difference is: `0.03229671 ± 0.00451870`
 
@@ -269,7 +258,7 @@ is relative to the statistical variation between the sub-samples.
 ----> The results provide evidence of an asymmetry between 211 and -211.
 
 
-### 321 vs -321
+#### 321 vs -321
 
 The average difference is: `0.00569100 ± 0.00329367`
 
@@ -279,7 +268,7 @@ statistical variation between the sub-samples.
 ----> The evidence doesn't support an asymmetry between 321 and -321 completely.
 
 
-### 2212 vs -2212
+#### 2212 vs -2212
 
 The average difference is: `0.02387314 ± 0.00237277`
 
@@ -288,7 +277,7 @@ The difference is approximately 10.06 times the statistical uncertainty.
 ----> The results provide evidence of an asymmetry between 2212 and -2212.
 
 
-### 3122 vs -3122
+#### 3122 vs -3122
 
 The average difference is: `0.00490256 ± 0.00058316`
 
@@ -297,7 +286,7 @@ The difference is approximately 8.41 times the statistical uncertainty.
 ----> The results provide evidence of an asymmetry between 3122 and -3122.
 
 
-### 3312 vs -3312
+#### 3312 vs -3312
 
 The average difference is: `0.00044067 ± 0.00048793`
 
@@ -306,7 +295,7 @@ The difference is approximately 0.90 times the statistical uncertainty.
 ----> There is no evidence of an asymmetry between 3312 and -3312.
 
 
-### 3334 vs -3334
+#### 3334 vs -3334
 
 The average difference is: `0.00003551 ± 0.00006854`
 

@@ -1,4 +1,4 @@
-# PRA2003 — Chemistry-Themed Programming Project
+# PRA2003 - Chemistry-Themed Project
 
 **Week 7 deliverable:** Updated README documenting the complete PRA2003 project and its development across the weekly assignments.  
 **Student:** Ketu Gugushvili (i6357186)  
@@ -7,7 +7,7 @@
 
 ## Project overview
 
-This project uses Python to analyse simulated molecular species produced during combustion at high temperatures. The work develops step by step: first reading molecule records and calculating momentum, then determining molecule frequencies and statistical uncertainties, and finally investigating differences between related molecule pairs, including how these differences vary with momentum.
+This project uses Python to analyse simulated molecular species produced during combustion at high temperatures. The work develops step by step: first reading molecule records and calculating momentum, then determining molecule frequencies and statistical uncertainties, and finally evaluating differences between molecule and isotope pairs, including how these differences vary with momentum.
 
 The dataset consists of simulation **events**, each containing a header followed by molecule records. Each molecule is identified by an integer ID and three momentum components. The analyses focus on twelve IDs, organised into six pairs.
 

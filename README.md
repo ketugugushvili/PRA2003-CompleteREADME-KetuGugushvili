@@ -1,6 +1,6 @@
 # PRA2003 - Chemistry-Themed Project
 
-**Week 7 deliverable:** Updated README documenting the complete PRA2003 project, the weekly assignments, and other relevant files.  
+**Week 7 deliverable:** Updated README documenting the complete PRA2003 project and the weekly assignments.  
 **Student:** Ketu Gugushvili (i6357186)  
 **Course:** Programming PRA2003 (MSP)  
 **Project theme:** Chemistry

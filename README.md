@@ -1,14 +1,17 @@
-# PRA2003-CompleteREADME-KetuGugushvili
-Week 7 Deliverable: Updated README and other relevant files for the whole PRA2003 chemistry-themed project. 
+# PRA2003 - Chemistry-Themed Project
 
-Ketu Gugushvili (i6357186)
-Programming PRA2003 (MSP)
+**Week 7 deliverable:** Updated README documenting the complete PRA2003 project, the weekly assignments, and other relevant files.  
+**Student:** Ketu Gugushvili (i6357186)  
+**Course:** Programming PRA2003 (MSP)  
+**Project theme:** Chemistry
 
-# Project theme: Chemistry 
+## Project overview
 
-Information for the project:
-* The project analyses simulations of molecular species produced during combustion at high temperatures.
-* The table below displays molecule types that are going to be analysed and their respective IDs. 
+The project analyses simulations of molecular species produced during combustion at high temperatures using Python.
+The process includes multiple steps: reading molecule records and calculating momentum, determining molecule frequencies and corresponding statistical uncertainties, and finally evaluating differences between molecule and isotope pairs, as well as how these differences vary with momentum.
+
+### Molecules analysed 
+The table below displays molecule types that are going to be analysed and their respective IDs: 
 
 | Molecule ID | Molecule type            |
 |-------------|--------------------------|
@@ -25,8 +28,23 @@ Information for the project:
 | 3334        | Ozone (O3)               |
 | -3334       | Superoxide anion (O2-)   |
 
-Input File Structure Explained: 
-* Each input file represents a single simulation of molecular species produced during combustion at high temperatures. 
+
+## Week 1 Deliverables: Research Questions  
+
+Questions to be answered: 
+1. **What are the average counts of each molecular species and their statistical uncertainties?
+2. **Is there any asymmetry between the normal and the variant molecule?
+   - Quantify!
+3. **Is there any asymmetry as a function of their momentum?
+   - Quantify! 
+   - Magnitude of total momentum calculated as: 
+$$
+p = \sqrt{p_x^2 + p_y^2 + p_z^2}.
+$$
+
+## Input data and file structure
+
+* Each input file represents repeated simulations of molecular species produced during combustion at high temperatures. 
 * The header contains: 
        - event ID: ID of the experiment or simulation run 
        - number of molecules tracked: Total number of molecules observed in this run 
@@ -34,18 +52,17 @@ Input File Structure Explained:
        - 3D momentum components (px, py, pz in 10^(-23)kg m/s)
        - an integer ID representing the molecule or isotope 
 
+```text
+<event_id> <number_of_molecules>
+<px> <py> <pz> <molecule_id>
+<px> <py> <pz> <molecule_id>
+...
+<next_event_id> <number_of_molecules>
+...
+```
 
-## Week 1 Deliverables: Research Questions  
-
-Questions to be answered: 
-1. What are the average counts of each molecular species
-and their statistical uncertainties?
-2. Is there any asymmetry between the normal and the
-variant molecule?
-   - Quantify!
-3. Is there any asymmetry as a function of their momentum?
-   - Quantify! 
-   - Magnitude of total momentum calculated as `p = sqrt(px^2 + py^2 + pz^2)`
+- `output-Set0.txt` is used by the Week 2 exercise.
+- `output-Set1.txt` through `output-Set10.txt` are the ten subsamples used for the later analysis.
 
 ## Repository structure
 
@@ -126,25 +143,49 @@ The script expects `output-Set1.txt` through `output-Set10.txt` in the current d
 
 **Before running:** fix the event-header parsing and momentum-table indentation issues identified in the code review. The program is designed to print subsample and combined results, pair differences and momentum-bin tables, and to save plots named `momentum_asymmetry_<positiveID>_<negativeID>.png`.
 
-## Input data format
+## Project development and weekly deliverables
 
-The analysis assumes a text file containing repeated events. Each event starts with a **two-integer header** followed by zero or more molecule records with four columns:
+### Week 2 — Reading data and calculating momentum
 
-```text
-<event_integer> <event_integer>
-<px> <py> <pz> <molecule_id>
-<px> <py> <pz> <molecule_id>
-...
-```
+**File:** `Week_2(1).py`
 
-Here `px`, `py`, and `pz` are momentum components and `molecule_id` identifies the species. The interpretation of the two header integers and the momentum units should be checked against the course dataset documentation. Do not treat the illustrative placeholders above as actual input lines.
+The first programming exercise introduces reading a text file, extracting molecule IDs and the momentum components, converting strings into numerical values, and calculating the magnitude of momentum:
 
-# Week 4 - Deliverables 
+$$
+p = \sqrt{p_x^2 + p_y^2 + p_z^2}.
+$$
 
-The deliverable of week 4 is to calculate the average number of each of the 
-12 molecules IDs per event. The entire sample of the 10 files should be analysed 
-as sub-samples, separately, and be assigned statistical uncertainty from the 
-spread of the results.  
+The script prints a table with the molecule ID and its calculated momentum. This establishes the data-reading and momentum calculations used again in the later analysis.
+
+**Current limitation:** This introductory script skips the first header and expects all following lines to contain four molecule fields. It needs a more general event parser to work with files containing additional headers.
+
+### Week 3 — Average molecule counts in one file
+
+**File:** `Week_3(2).py`
+
+The program asks the user for an input filename, selects the twelve molecule IDs of interest, counts their occurrences, and calculates the average number of molecules per event and its Poisson statistical uncertainty. The results are printed in a table for all twelve species.
+
+For molecule ID $m$:
+
+$$
+\bar N_m = \frac{N_m}{N_{\mathrm{events}}},
+$$
+
+where $N_m$ is the number of occurrences of that molecule and $N_{\mathrm{events}}$ is the number of events analysed.
+
+Assuming Poisson counting statistics, the uncertainty on the average is:
+
+$$
+\sigma_{\bar N_m} = \frac{\sqrt{N_m}}{N_{\mathrm{events}}}.
+$$
+
+The script includes filename input, protection against empty input, and handling for missing files and file-access errors. **Current limitation:** The uploaded version counts events containing molecule records, rather than counting all event headers, so empty events may be missed. This should be corrected and checked against reference event totals.
+
+### Week 4 — Subsampling and overall molecule-pair asymmetry
+
+**File:** `Week_4(3).py` (also includes the Week 5 analysis)
+
+The deliverable of week 4 is to calculate the average number of each of the 12 molecule IDs per event. The entire sample of the 10 files should be analysed as sub-samples, separately, and be assigned statistical uncertainty from the spread of the results.  
 
 The analysis also questions whether there is evidence of an asymmetry
 between each molecule pair by calculating their mean differences:
@@ -293,166 +334,49 @@ The difference is approximately 0.52 times the statistical uncertainty.
 --> The difference is smaller than its uncertainty.
 ----> There is no evidence of an asymmetry between 3334 and -3334.
 
-# Week 5 - Deliverables 
+### Week 5 — Momentum-dependent asymmetry
 
-## Theory and statistical methods
+**File:** `Week_4(3).py`
 
-### 1. Average frequency per event
+The next question is whether the difference between each molecule and its variant changes with momentum. Instead of calculating only one difference for the complete momentum range, the program calculates a **separate average frequency difference for every momentum bin**.
 
-For molecule type `m`, the mean number of occurrences per event is
+The configured momentum range is 0–20, divided into 20 equal-width bins. The program calculates each molecule's momentum magnitude and counts molecules directly into the appropriate bin. This avoids storing every individual momentum value and reduces memory usage.
 
-$$
-\bar N_m = \frac{N_m}{N_{\mathrm{events}}},
-$$
-
-where `N_m` is the total count of that molecule and `N_events` is the number of events analysed.
-
-### 2. Poisson uncertainty for one file
-
-For a Poisson count, the uncertainty on the mean count per event is estimated as
-
-$$
-\sigma_{\bar N_m} = \frac{\sqrt{N_m}}{N_{\mathrm{events}}}.
-$$
-
-This is the method implemented for individual-file results. It assumes Poisson counting behaviour.
-
-### 3. Subsampling uncertainty
-
-For ten subsamples, calculate the average count per event in each file. The combined average is weighted by the number of events:
-
-$$
-\bar N_m = \frac{\sum_i n_i\bar N_{m,i}}{\sum_i n_i},
-$$
-
-where `n_i` is the event count in subsample `i`.
-
-The code reports the **sample standard deviation of the ten subsample averages** as the subsampling uncertainty:
-
-$$
-s_m = \sqrt{\frac{1}{K-1}\sum_{i=1}^{K}(\bar N_{m,i}-\langle\bar N_m\rangle)^2},\qquad K=10.
-$$
-
-This describes the spread across subsamples. It is **not** the standard error of their mean (`s/√K`).
-
-### 4. Overall pair difference
-
-For each pair, calculate the difference **within the same subsample**:
-
-$$
-D_i = \bar N_{+,i}-\bar N_{-,i}.
-$$
-
-The combined mean difference is weighted by subsample event counts, and the uncertainty is the sample standard deviation of the paired differences:
-
-$$
-\sigma_D = SD(D_1,\ldots,D_K).
-$$
-
-This paired approach preserves the covariance between the two species across subsamples. Combining their separate uncertainties in quadrature would assume zero covariance and is not the method used here.
-
-The descriptive difference-to-uncertainty ratio is
-
-$$
-R=\frac{|\bar D|}{\sigma_D}.
-$$
-
-A larger ratio means a larger observed difference relative to the reported spread. This ratio should **not** automatically be interpreted as a formal Gaussian hypothesis-test significance, because the denominator is the subsample standard deviation rather than the standard error of the combined mean.
-
-### 5. Momentum magnitude
-
-For each molecule record,
-
-$$
-p = \sqrt{p_x^2+p_y^2+p_z^2}.
-$$
-
-The configured range is divided into equal-width momentum bins. The current implementation counts entries directly into these bins, avoiding storage of every momentum value.
-
-### 6. Momentum-dependent average frequency difference
-
-For each subsample `i` and momentum bin `j`, calculate the frequency of each molecule per event:
+For subsample $i$ and momentum bin $j$, the average frequency per event is:
 
 $$
 f_{\pm,i,j}=\frac{N_{\pm,i,j}}{n_i}.
 $$
 
-Then subtract **within the same subsample**:
+The paired difference for that subsample and bin is:
 
 $$
 D_{i,j}=f_{+,i,j}-f_{-,i,j}.
 $$
 
-For each momentum bin, the plotted y-value is the mean of the paired differences across the ten subsamples:
+The graph's y-value is the mean paired difference across the ten subsamples:
 
 $$
-\bar D_j=\frac{1}{K}\sum_{i=1}^K D_{i,j},
+\bar D_j=\frac{1}{K}\sum_{i=1}^{K}D_{i,j},
 $$
 
-with vertical error bars given by
+and the vertical error bar is the sample standard deviation:
 
 $$
-\sigma_j=SD(D_{1,j},\ldots,D_{K,j}).
+\sigma_j=SD(D_{1,j},D_{2,j},\ldots,D_{K,j}).
 $$
 
-**Graph interpretation:** a positive y-value indicates a higher mean frequency for the normal species in that bin; a negative value indicates a higher mean frequency for the variant; zero indicates equal mean frequencies. The horizontal error bars indicate half the bin width. The y-axis is a **frequency difference per event**, not a percentage or normalized ratio.
+**Reading the graphs:**
 
-**Important:** the momentum-bin mean is equally weighted across subsamples in the current code, while the overall combined mean is event-weighted. They agree when subsample event counts are equal. Check event counts before interpreting them as directly comparable.
+- **X-axis:** Momentum magnitude, divided into bins.
+- **Y-axis:** Average frequency difference per event between the two molecules in each momentum bin.
+- **Positive y-value:** The positive-ID molecule occurs more frequently in that bin, on average per event.
+- **Negative y-value:** The negative-ID molecule occurs more frequently.
+- **Zero:** Equal average frequencies for the pair in that bin.
+- **Vertical error bars:** Subsample standard deviation of the paired differences.
+- **Horizontal error bars:** Half the momentum-bin width, showing the bin interval rather than measurement uncertainty in momentum.
 
-## Results and interpretation
+The momentum-bin mean is currently equally weighted across subsamples, while the overall Week 4 mean is event-weighted. The two are directly comparable when the subsamples have equal event counts; otherwise, this difference in weighting should be considered.
 
-The project's presentation previously reported the following **overall** results for two example pairs:
-
-| Pair | Mean difference per event | Subsampling SD | Difference / SD |
-|---|---:|---:|---:|
-| 321 vs -321 | 0.00569100 | 0.00329367 | 1.73 |
-| 3312 vs -3312 | 0.00044067 | 0.00048793 | 0.90 |
-
-These are **previously reported values, not newly reproduced results from the latest scripts**. They indicate small pair differences relative to the reported subsample spread. Neither ratio by itself establishes a formal statistical discovery or a momentum-dependent effect.
-
-After fixing the parsing and rerunning the complete dataset, add a verified table for all six pairs, the complete twelve-species frequency table, and the six momentum plots here. The code is configured to generate those results, but they have not been verified in this README.
-
-## Output files
-
-- Console tables: per-subsample molecule frequencies and uncertainties, combined averages, overall pair differences, and momentum-bin results.
-- Six PNG figures, one per pair, named `momentum_asymmetry_*.png`.
-- Console diagnostics including the total number of events and number of selected molecules outside the configured momentum range.
-
-The scripts do not currently export the numerical tables to CSV. If needed, this can be added as a future improvement.
-
-## Validation and limitations
-
-- Verify that event headers are parsed and counted correctly, including zero-particle events.
-- Verify that each input file has the expected event count and that the combined total matches the assigned dataset.
-- Confirm momentum units and whether the 0–20 range captures the relevant distribution; out-of-range entries are excluded from the momentum plots.
-- Verify the Week 2 script against files containing multiple events.
-- The standard deviation across subsamples is a spread measure, not automatically a formal standard error.
-- Inspect neighbouring momentum bins and uncertainties rather than claiming an asymmetry from a single isolated bin.
-- Avoid committing very large course data files unless permitted and necessary for reproducibility.
-
-## Reproducibility
-
-Run the scripts from the project directory with the same dataset files and unchanged analysis settings. Record your Python, NumPy and Matplotlib versions if numerical reproducibility is important. Keep the input file naming consistent, and compare the event totals and representative molecule frequencies against reference results before interpreting the graphs.
-
-## Future improvements
-
-- Add a shared, validated event parser reused by all three scripts.
-- Add automated tests for empty events, malformed rows, invalid IDs and momentum-bin boundaries.
-- Export final tables to CSV.
-- Allow input directory and momentum-bin settings as command-line arguments.
-- Add verified figures and final numerical results to this README.
-
-## Contributors
-
-Python 2 project group. Add the contributors' preferred names and GitHub handles here before publishing.
-
-## Acknowledgements and references
-
-- PRA2003 course materials and supplied simulation dataset.
-- [Python documentation](https://docs.python.org/3/)
-- [NumPy documentation](https://numpy.org/doc/)
-- [Matplotlib documentation](https://matplotlib.org/stable/)
-
-## License and data availability
-
-No open-source license has been specified. Add a `LICENSE` file only after agreeing on the intended license with the contributors. Course-supplied datasets may have separate sharing restrictions; do not publish them without permission.
+The script is designed to generate one plot per pair, named `momentum_asymmetry_<positiveID>_<negativeID>.png`. Once the corrected code has been run and checked, the plots can be added here. A single unusual bin among twenty does not automatically establish a momentum-dependent effect.
+ 

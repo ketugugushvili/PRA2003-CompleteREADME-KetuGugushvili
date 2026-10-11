@@ -135,7 +135,7 @@ $$
        - In case the number of events is the same in all sub-samples, the weighted average is the same as the standard average. 
 
 
-### Statistical uncertainty
+#### Statistical uncertainty
 
 * To calculate statistical uncertainty, the sub-sampling method was used.
 
@@ -313,49 +313,4 @@ The difference is approximately 0.52 times the statistical uncertainty.
 --> The difference is smaller than its uncertainty.
 ----> There is no evidence of an asymmetry between 3334 and -3334.
 
-### Week 5 — Momentum-dependent asymmetry
-
-**File:** `Week_4(3).py`
-
-The next question is whether the difference between each molecule and its variant changes with momentum. Instead of calculating only one difference for the complete momentum range, the program calculates a **separate average frequency difference for every momentum bin**.
-
-The configured momentum range is 0–20, divided into 20 equal-width bins. The program calculates each molecule's momentum magnitude and counts molecules directly into the appropriate bin. This avoids storing every individual momentum value and reduces memory usage.
-
-For subsample $i$ and momentum bin $j$, the average frequency per event is:
-
-$$
-f_{\pm,i,j}=\frac{N_{\pm,i,j}}{n_i}.
-$$
-
-The paired difference for that subsample and bin is:
-
-$$
-D_{i,j}=f_{+,i,j}-f_{-,i,j}.
-$$
-
-The graph's y-value is the mean paired difference across the ten subsamples:
-
-$$
-\bar D_j=\frac{1}{K}\sum_{i=1}^{K}D_{i,j},
-$$
-
-and the vertical error bar is the sample standard deviation:
-
-$$
-\sigma_j=SD(D_{1,j},D_{2,j},\ldots,D_{K,j}).
-$$
-
-**Reading the graphs:**
-
-- **X-axis:** Momentum magnitude, divided into bins.
-- **Y-axis:** Average frequency difference per event between the two molecules in each momentum bin.
-- **Positive y-value:** The positive-ID molecule occurs more frequently in that bin, on average per event.
-- **Negative y-value:** The negative-ID molecule occurs more frequently.
-- **Zero:** Equal average frequencies for the pair in that bin.
-- **Vertical error bars:** Subsample standard deviation of the paired differences.
-- **Horizontal error bars:** Half the momentum-bin width, showing the bin interval rather than measurement uncertainty in momentum.
-
-The momentum-bin mean is currently equally weighted across subsamples, while the overall Week 4 mean is event-weighted. The two are directly comparable when the subsamples have equal event counts; otherwise, this difference in weighting should be considered.
-
-The script is designed to generate one plot per pair, named `momentum_asymmetry_<positiveID>_<negativeID>.png`. Once the corrected code has been run and checked, the plots can be added here. A single unusual bin among twenty does not automatically establish a momentum-dependent effect.
  

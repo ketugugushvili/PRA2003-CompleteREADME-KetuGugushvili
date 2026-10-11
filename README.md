@@ -32,10 +32,10 @@ The table below displays molecule types that are going to be analysed and their 
 ## Week 1 Deliverables: Research Questions  
 
 Questions to be answered: 
-1. **What are the average counts of each molecular species and their statistical uncertainties?
-2. **Is there any asymmetry between the normal and the variant molecule?
+1. **What are the average counts of each molecular species and their statistical uncertainties?**
+2. **Is there any asymmetry between the normal and the variant molecule?**
    - Quantify!
-3. **Is there any asymmetry as a function of their momentum?
+3. **Is there any asymmetry as a function of their momentum?**
    - Quantify! 
    - Magnitude of total momentum calculated as: 
 $$

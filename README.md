@@ -308,22 +308,27 @@ The difference is approximately 0.52 times the statistical uncertainty.
 ### Week 5: Momentum-Dependent Asymmetry
 
 #### 211 vs -211: Carbon monoxide and Carbon-13 monoxide
-<img width="2700" height="1800" alt="momentum_asymmetry_211_-211" src="https://github.com/user-attachments/assets/67c3d01b-cd2a-4eaf-9a1b-1947943cae50" />
+
+<img src="Plots/momentum_asymmetry_211_-211.png" alt="Description of image" width="400">
 
 #### 321 vs -321: Nitric Oxide and ionised NO
-<img width="2700" height="1800" alt="momentum_asymmetry_321_-321" src="https://github.com/user-attachments/assets/ec709baf-339c-414e-a8b3-fe4d336778af" />
+
+<img src="Plots/momentum_asymmetry_321_-321.png" alt="Description of image" width="400">
 
 #### 2212 vs -2212: Water and heavy water 
-<img width="2700" height="1800" alt="momentum_asymmetry_2212_-2212" src="https://github.com/user-attachments/assets/fd9098a3-c365-42c9-a91e-1910669787cd" />
+
+<img src="Plots/momentum_asymmetry_2212_-2212.png" alt="Description of image" width="400">
 
 #### 3122 vs -3122: Methane and methyl ion
-<img width="2700" height="1800" alt="momentum_asymmetry_3122_-3122" src="https://github.com/user-attachments/assets/0a31794a-92b4-49d1-8003-76b52fadf098" />
+
+<img src="Plots/momentum_asymmetry_3122_-3122.png" alt="Description of image" width="400">
 
 #### 3312 vs -3312: Ethylene and ionised ethylene
-<img width="2700" height="1800" alt="momentum_asymmetry_3312_-3312" src="https://github.com/user-attachments/assets/88c4d527-5113-4f92-af15-53e5533248fc" />
+
+<img src="Plots/momentum_asymmetry_3312_-3312.png" alt="Description of image" width="400">
 
 #### 3334 vs -3334: Ozone  and superoxide anion 
 
-<img width="2700" height="1800" alt="momentum_asymmetry_3334_-3334" src="https://github.com/user-attachments/assets/71e45aaa-eb5f-4a97-9d1b-f3e7c05fd207" />
+<img src="Plots/momentum_asymmetry_3334_-3334.png" alt="Description of image" width="400">
 
  

@@ -165,11 +165,11 @@ $$
 * This ratio represents how large the observed difference is compared to the statistical variation between the subsamples. 
 * A larger ratio means that the observed difference is large compared with the subsample spread, therefore significant.
    - This ratio was used in this analysis as a descriptive measure to support the asymmetry comparison:
-     - 1$\sigma$: 1 in 6 chance the result is caused by fluctuations
-     - 2$\sigma$: 1 in 44 chance
-     - 3$\sigma$: correspond to a 1-in-740 chance of a statistical quirk
-     - 4$\sigma$: corresponds to a 1-in-32,000 chance
-     - 5$\sigma$: is a 1-in-3.5 million chance
+     - $1\sigma$: 1 in 6 chance the result is caused by fluctuations
+     - $2\sigma$: 1 in 44 chance
+     - $3\sigma$: correspond to a 1-in-740 chance of a statistical quirk
+     - $4\sigma$: corresponds to a 1-in-32,000 chance
+     - $5\sigma$: is a 1-in-3.5 million chance
 
 ### Week 5 Deliverables: Momentum-dependent asymmetry 
 
@@ -215,7 +215,7 @@ $$
 
 The momentum-bin mean is currently equally weighted across subsamples, while the overall Week 4 mean is event-weighted. The two are directly comparable when the subsamples have equal event counts; otherwise, this difference in weighting should be considered.
 
-The script is designed to generate one plot per pair, named `momentum_asymmetry_<positiveID>_<negativeID>.png`. Once the corrected code has been run and checked, the plots can be added here. A single unusual bin among twenty does not automatically establish a momentum-dependent effect.
+The script is designed to generate one plot per pair, named `momentum_asymmetry_<positiveID>_<negativeID>.png`.
 
 ## Results and interpretation
 
@@ -325,7 +325,7 @@ The average difference is: `0.00003551 ± 0.00006854`
 
 <img src="Plots/momentum_asymmetry_3334_-3334.png" alt="Description of image" width="600">
 
-##### Overall comparison and interpretation of momentum-dependent asymmetry 
+#### Overall comparison and interpretation of momentum-dependent asymmetry 
 
 | Molecule pair | Pattern visible in momentum plot | Interpretation |
 |---|---|---|
@@ -394,7 +394,7 @@ Run the scripts from the project directory in the order corresponding to the wee
 **Week 2 — Calculate molecule momentum:**
 
 ```bash
-python "Week_2(1).py"
+python "Week_2.py"
 ```
 
 The script reads `output-Set0.txt` and prints molecule IDs and momentum magnitudes.
@@ -402,7 +402,7 @@ The script reads `output-Set0.txt` and prints molecule IDs and momentum magnitud
 **Week 3 — Analyse one file:**
 
 ```bash
-python "Week_3(2).py"
+python "Week_3.py"
 ```
 
 Enter the input filename when prompted, for example `output-Set1.txt`. The script prints the number of detected events and the average frequency and Poisson uncertainty for each of the twelve molecule IDs.
@@ -410,14 +410,14 @@ Enter the input filename when prompted, for example `output-Set1.txt`. The scrip
 **Weeks 4–5 — Analyse all ten subsamples and generate plots:**
 
 ```bash
-python "Week_4(3).py"
+python "Week_4.py"
 ```
 
 This script expects `output-Set1.txt` through `output-Set10.txt`. It prints the per-subsample and combined frequency tables, overall molecule-pair differences, and momentum-dependent bin results, then saves six PNG graphs.
 
-The filenames, momentum range, and number of bins are configured near the top of `Week_4(3).py` using `FILENAMES`, `MOMENTUM_MIN`, `MOMENTUM_MAX` and `NUMBER_OF_BINS`.
+The filenames, momentum range, and number of bins are configured near the top of `Week_4.py` using `FILENAMES`, `MOMENTUM_MIN`, `MOMENTUM_MAX` and `NUMBER_OF_BINS`.
 
-**Status of the uploaded code:** Before relying on the output, correct the event-header parsing in `Week_4(3).py` and the indentation of the momentum-bin results printing loop. The current Week 3 event counting and Week 2 multi-event parsing also require review. The scripts have not been verified against the complete input dataset in this README.
+**Status of the uploaded code:** Before relying on the output, correct the event-header parsing in `Week_4.py` and the indentation of the momentum-bin results printing loop. The current Week 3 event counting and Week 2 multi-event parsing also require review. The scripts have not been verified against the complete input dataset in this README.
 
 ## Program output
 
@@ -425,7 +425,7 @@ The project produces:
 
 1. A Week 2 console table of molecule IDs and momentum magnitudes.
 2. A Week 3 table of average counts per event and Poisson uncertainties for one input file.
-3. Weeks 4–5 tables of individual-subsample results, combined averages, pair differences and momentum-bin differences.
+3. Weeks 45 tables of individual-subsample results, combined averages, pair differences and momentum-bin differences.
 4. Six momentum-dependent PNG graphs (one for each molecule pair).
 5. Diagnostics such as the number of analysed events and the count of selected molecules outside the chosen momentum range.
 
@@ -445,9 +445,9 @@ The current scripts do not export numerical tables to CSV.
 
 ## Reproducibility and future improvements
 
-To reproduce the analysis, use the same input files, filenames, Python packages and momentum-bin settings. Check the event counts first, then compare the individual molecule averages and pair differences with the previously recorded results before interpreting the graphs.
+To reproduce the analysis, use the same input files, filenames, Python packages, and momentum-bin settings. Check the event counts first, then compare the individual molecule averages and pair differences with the previously recorded results before interpreting the graphs.
 
-Potential improvements include a shared event parser across all three scripts, automated tests for empty events and malformed records, CSV export for numerical tables, configurable input paths and verified momentum plots embedded in this README.
+Potential improvements include a shared event parser across all three scripts, automated tests for empty events and malformed records, CSV export for numerical tables, configurable input paths, and verified momentum plots embedded in this README.
 
 ## References
 

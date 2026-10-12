@@ -100,9 +100,9 @@ $$
 \sigma_{\bar N_m} = \frac{\sqrt{N_m}}{N_{\mathrm{events}}}.
 $$
 
-The statistical uncertainty is calculated using the Poisson assumption, where the standard deviation of a count \(N_m\) is approximated by \(\sqrt{N_m}\). Since the reported result is the average number of molecules per event rather than the total count, this uncertainty is divided by the number of analysed events.
+The statistical uncertainty is calculated using the Poisson assumption, where the standard deviation of a count $\(N_m\)$ is approximated by $\(\sqrt{N_m}\)$. Since the reported result is the average number of molecules per event rather than the total count, this uncertainty is divided by the number of analysed events.
 
-For example, if a molecule appears 1,000 times across 100 analysed events, its average frequency is 10 molecules per event, with a Poisson uncertainty of \(\sqrt{1000}/100 \approx 0.316\).
+For example, if a molecule appears 1,000 times across 100 analysed events, its average frequency is 10 molecules per event, with a Poisson uncertainty of $\(\sqrt{1000}/100 \approx 0.316\)$.
 
 This approach estimates uncertainty from the total molecule count. In the following weeks, subsampling is introduced to estimate uncertainty from the variation between independent subsets of the simulation data.
 
@@ -112,7 +112,7 @@ The results for each of the 12 molecule IDs are displayed in the table.
 
 **File:** `Week_4_5_Complete_Analysis.py` (also includes the Week 5 analysis)
 
-The Week 4 code calculates the average number of each of the 12 molecule IDs per event. The entire sample of the 10 files is analysed as sub-samples, separately, and assigned statistical uncertainty from the spread of the results.  
+The Week 4 code calculates the average number of each of the 12 molecule IDs per event. The entire sample of the 10 files is analysed as sub-samples separately, and assigned statistical uncertainty from the spread of the results.  
 
 The analysis also questions whether there is evidence of an asymmetry between each molecule pair by calculating their mean differences:
 - 211 and -211

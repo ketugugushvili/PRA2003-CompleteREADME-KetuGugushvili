@@ -50,6 +50,7 @@ The table below displays molecule types that are going to be analysed and their 
 | 3334        | Ozone (O3)               |
 | -3334       | Superoxide anion (O2-)   |
 
+For the subsampling analysis, the average number of molecules per event is calculated using nonempty events only. Events without molecule records are excluded from the event count, following the event-counting method used in the analysis code. Therefore, the reported averages represent frequencies per nonempty event rather than per every generated simulation event.
 
 ## Week 1 Deliverables: Research Questions  
 
@@ -99,6 +100,12 @@ $$
 \sigma_{\bar N_m} = \frac{\sqrt{N_m}}{N_{\mathrm{events}}}.
 $$
 
+The statistical uncertainty is calculated using the Poisson assumption, where the standard deviation of a count \(N_m\) is approximated by \(\sqrt{N_m}\). Since the reported result is the average number of molecules per event rather than the total count, this uncertainty is divided by the number of analysed events.
+
+For example, if a molecule appears 1,000 times across 100 analysed events, its average frequency is 10 molecules per event, with a Poisson uncertainty of \(\sqrt{1000}/100 \approx 0.316\).
+
+This approach estimates uncertainty from the total molecule count. In the following weeks, subsampling is introduced to estimate uncertainty from the variation between independent subsets of the simulation data.
+
 The results for each of the 12 molecule IDs are displayed in the table. 
 
 ### Week 4: Subsampling and overall molecule-pair asymmetry 
@@ -137,6 +144,16 @@ $$
 $$
 s_m = \sqrt{\frac{1}{K-1}\sum_{i=1}^{K}\left(\bar N_{m,i}-\langle\bar N_m\rangle\right)^2}.
 $$
+
+where:
+* (K=10) is the number of subsamples.
+* (\bar N_{m,i}) is the average frequency of molecule (m) in subsample (i).
+* (\bar N_{m,\mathrm{unweighted}}) is the arithmetic mean of the ten subsample averages.
+* (s_m) is the sample standard deviation of the ten average frequencies.
+
+In Python, the uncertainty is calculated using np.std(values, ddof=1). The parameter ddof=1 applies the sample standard deviation formula, dividing the sum of squared deviations by (K-1) rather than (K).
+
+The final reported average frequency is event-weighted because subsamples containing more events contribute proportionally more to the combined estimate. However, the uncertainty is calculated from the unweighted spread of the ten subsample averages.
 
 #### Molecule-Pair Asymmetry Analysis
 
@@ -202,6 +219,27 @@ and the vertical error bar is the sample standard deviation:
 $$
 SD=SD(D_{1,j},D_{2,j},\ldots,D_{K,j}).
 $$
+
+* For the momentum-dependent analysis, the uncertainty was calculated separately for every momentum bin and every molecule pair.
+* First, the momentum range was divided into 20 equal-width bins. For each bin, the average frequency difference between the paired molecules was calculated independently in each of the ten subsamples.
+* This produced ten frequency differences for each momentum bin.
+
+* The mean difference plotted on the graph was calculated as the arithmetic mean of these ten differences. The vertical error bar was calculated as their sample standard deviation:
+
+[
+s_{D,j}=\sqrt{\frac{1}{K-1}\sum_{i=1}^{K}
+(D_{i,j}-\bar D_j)^2}
+]
+
+where:
+* (D_{i,j}) is the paired frequency difference in subsample (i) and momentum bin (j).
+* (\bar D_j) is the arithmetic mean of the ten differences in bin (j).
+* (K=10) is the number of subsamples.
+* (s_{D,j}) is the sample standard deviation for bin (j).
+
+In Python, this is calculated using np.std(subsample_differences, axis=0, ddof=1), where axis=0 calculates the standard deviation across the ten subsamples independently for each momentum bin.
+* The vertical error bars therefore show how much the paired frequency difference varies between subsamples in each bin.
+* The horizontal error bars represent half the width of the momentum bins and indicate the momentum interval covered by each point. They do not represent statistical uncertainty in the measured momentum.
 
 **Reading the graphs:**
 
@@ -339,18 +377,35 @@ The average difference is: `0.00003551 ± 0.00006854`
 
 ## Repository structure
 
-```text
+
 PRA2003-project/
 ├── README.md
-├── Week_2(1).py                 # Week 2: momentum calculation
-├── Week_3(2).py                 # Week 3: one-file molecule frequencies
-├── Week_4(3).py                 # Weeks 4–5: subsamples, pair and momentum analysis
-├── output-Set0.txt              # Week 2 input, if available
-├── output-Set1.txt              # Subsample 1
-├── ...
-├── output-Set10.txt             # Subsample 10
-└── momentum_asymmetry_*.png     # Generated momentum plots
-```
+├── Week_2_Momentum.py
+├── Week_3_Molecule_Frequencies.py
+├── Week_4_5_Complete_Analysis.py
+│
+├── Plots/
+│   ├── momentum_asymmetry_211_-211.png
+│   ├── momentum_asymmetry_321_-321.png
+│   ├── momentum_asymmetry_2212_-2212.png
+│   ├── momentum_asymmetry_3122_-3122.png
+│   ├── momentum_asymmetry_3312_-3312.png
+│   └── momentum_asymmetry_3334_-3334.png
+│
+├── csv_results/
+│   ├── subsample_results.csv
+│   ├── final_molecule_results.csv
+│   ├── overall_pair_asymmetry.csv
+│   ├── momentum_asymmetry_results.csv
+│   ├── momentum_211_-211.csv
+│   ├── momentum_321_-321.csv
+│   ├── momentum_2212_-2212.csv
+│   ├── momentum_3122_-3122.csv
+│   ├── momentum_3312_-3312.csv
+│   └── momentum_3334_-3334.csv
+│
+└── output-Set*.txt
+
 
 Large course-provided data files may be excluded from the public repository. In that case, obtain them through the course and place them in the working directory before running the scripts.
 
@@ -421,33 +476,49 @@ The filenames, momentum range, and number of bins are configured near the top of
 
 ## Program output
 
-The project produces:
+The project produces the following outputs:
 
-1. A Week 2 console table of molecule IDs and momentum magnitudes.
-2. A Week 3 table of average counts per event and Poisson uncertainties for one input file.
-3. Weeks 45 tables of individual-subsample results, combined averages, pair differences and momentum-bin differences.
-4. Six momentum-dependent PNG graphs (one for each molecule pair).
-5. Diagnostics such as the number of analysed events and the count of selected molecules outside the chosen momentum range.
+1. A Week 2 console table displaying molecule IDs and their momentum magnitudes.
+2. A Week 3 table showing average molecule frequencies and Poisson uncertainties for a selected input file.
+3. Week 4 tables containing individual subsample frequencies, combined averages, statistical uncertainties and overall molecule-pair differences.
+4. Six Week 5 momentum-dependent asymmetry plots, one for each molecule pair.
+5. CSV files containing the numerical results of the subsampling and momentum-dependent analyses.
 
-The current scripts do not export numerical tables to CSV.
+### CSV results
+
+The final Python program automatically exports the numerical analysis results into the `csv_results/` directory.
+
+| File | Contents |
+|---|---|
+| `subsample_results.csv` | Average frequencies, Poisson uncertainties and event counts for each molecule ID in every subsample |
+| `final_molecule_results.csv` | Final weighted average frequencies and subsampling uncertainties |
+| `overall_pair_asymmetry.csv` | Average paired differences, uncertainties and difference-to-uncertainty ratios |
+| `momentum_asymmetry_results.csv` | Momentum-bin results for all six molecule pairs |
+| `momentum_<positiveID>_<negativeID>.csv` | Individual momentum-dependent results for each molecule pair |
+
+The exported CSV files are also included in the GitHub repository, allowing the numerical results to be inspected and compared without rerunning the analysis.
+
+The six generated PNG plots are stored in the `Plots/` directory and displayed in the Week 5 Results section.
 
 ## Validation, assumptions and limitations
 
-- Event headers must be counted correctly, including events with zero molecule records. Compare the total number of events with the course-provided reference.
-- Malformed input records and non-integer molecule IDs should be rejected rather than silently interpreted as valid data.
-- Week 2's simple reader is intended as an introductory exercise and is not yet a general multi-event parser.
-- The Poisson uncertainty in Week 3 assumes Poisson counting statistics.
-- The subsample standard deviation in Weeks 4–5 measures spread between subsamples; it is not automatically the standard error of the combined estimate.
-- Pairwise differences are calculated within the same subsample to retain the effect of shared variation.
-- Molecules outside the configured momentum range are excluded from the momentum-bin plots; the diagnostic count should be checked.
-- Momentum units and graph-axis labels must be made consistent with the supplied dataset.
-- The numerical results shown above were obtained earlier and must be rechecked after the latest parsing corrections.
+- The subsampling analysis uses nonempty events only when calculating average molecule frequencies. Events without molecule records are excluded from the denominator.
+- Week 3 uses Poisson counting uncertainty, assuming the molecule counts follow Poisson statistics.
+- Weeks 4–5 use the sample standard deviation across ten subsamples to quantify statistical variation. This is not equivalent to the standard error of the combined mean.
+- Overall molecule-pair differences are calculated within each subsample before combining the results, preserving the paired structure of the data.
+- The difference-to-uncertainty ratios are descriptive comparisons and are not interpreted as formal Gaussian significance levels.
+- Week 4 uses event-weighted averages, whereas Week 5 uses equally weighted averages across subsamples. This distinction matters if the subsamples contain different numbers of events.
+- Molecules outside the selected momentum range are excluded from the momentum-dependent analysis.
+- The momentum units and bin settings should be consistent with the original simulation dataset.
+- The numerical results and plots can be inspected using the CSV and PNG files included in the repository.
 
 ## Reproducibility and future improvements
 
-To reproduce the analysis, use the same input files, filenames, Python packages, and momentum-bin settings. Check the event counts first, then compare the individual molecule averages and pair differences with the previously recorded results before interpreting the graphs.
+The project includes Python scripts, numerical CSV outputs and momentum-dependent asymmetry plots to support reproducibility.
 
-Potential improvements include a shared event parser across all three scripts, automated tests for empty events and malformed records, CSV export for numerical tables, configurable input paths, and verified momentum plots embedded in this README.
+To reproduce the analysis, the same input datasets, molecule IDs, event-counting method and momentum-bin settings should be used. The exported CSV files allow the individual subsample results and final calculated values to be checked independently.
+
+Possible future improvements include implementing automated tests for data parsing and statistical calculations, introducing configurable input and output directories, and extending the analysis to additional molecule species or momentum ranges.
 
 ## References
 

@@ -308,7 +308,7 @@ The difference is approximately 0.52 times the statistical uncertainty.
 ### Week 5: Momentum-Dependent Asymmetry
 
 #### 211 vs -211: Carbon monoxide and Carbon-13 monoxide
-<img width="1500" height="1000" alt="momentum_asymmetry_211_-211" src="https://github.com/user-attachments/assets/67c3d01b-cd2a-4eaf-9a1b-1947943cae50" />
+<img width="2700" height="1800" alt="momentum_asymmetry_211_-211" src="https://github.com/user-attachments/assets/67c3d01b-cd2a-4eaf-9a1b-1947943cae50" />
 
 #### 321 vs -321: Nitric Oxide and ionised NO
 <img width="2700" height="1800" alt="momentum_asymmetry_321_-321" src="https://github.com/user-attachments/assets/ec709baf-339c-414e-a8b3-fe4d336778af" />

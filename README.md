@@ -70,7 +70,7 @@ $$
 
 ### Week 2: Data reading and momentum calculation
 
-**File:** `Week_2.py`
+**File:** `Week_2_Momentum.py`
 
 The Week 2 code reads a text file, selects molecule IDs and the momentum components, converts strings into numerical values, and calculates the magnitude of momentum:
 
@@ -82,7 +82,7 @@ The results are displayed in a table of the molecule ID and its calculated momen
 
 ### Week 3: Average molecule frequency and Poisson uncertainty
 
-**File:** `Week_3.py`
+**File:** `Week_3_Molecule_Frequencies.py`
 
 The Week 3 code asks the user for an input filename, selects the 12 molecule IDs of interest, counts their occurrences, and calculates the average number of molecules per event and its Poisson statistical uncertainty. 
 
@@ -110,7 +110,7 @@ The results for each of the 12 molecule IDs are displayed in the table.
 
 ### Week 4: Subsampling and overall molecule-pair asymmetry 
 
-**File:** `Week_4(3).py` (also includes the Week 5 analysis)
+**File:** `Week_4_5_Complete_Analysis.py` (also includes the Week 5 analysis)
 
 The Week 4 code calculates the average number of each of the 12 molecule IDs per event. The entire sample of the 10 files is analysed as sub-samples, separately, and assigned statistical uncertainty from the spread of the results.  
 
@@ -190,7 +190,7 @@ $$
 
 ### Week 5 Deliverables: Momentum-dependent asymmetry 
 
-**File:** `Week_4.py`
+**File:** `Week_4_5_Complete_Analysis.py`
 
 The next question is whether the difference between each molecule and its variant changes with momentum. Instead of calculating only one difference for the complete momentum range, the program calculates a **separate average frequency difference for every momentum bin**.
 
@@ -446,33 +446,32 @@ Place the required `.txt` files alongside the scripts, or adjust the filenames i
 
 Run the scripts from the project directory in the order corresponding to the weekly work.
 
-**Week 2 — Calculate molecule momentum:**
+**Week 2 - Calculate molecule momentum:**
 
 ```bash
-python "Week_2.py"
+python "Week_2_Momentum.py"
 ```
 
 The script reads `output-Set0.txt` and prints molecule IDs and momentum magnitudes.
 
-**Week 3 — Analyse one file:**
+**Week 3 - Analyse one file:**
 
 ```bash
-python "Week_3.py"
+python "Week_3_Molecule_Frequencies.py"
 ```
 
 Enter the input filename when prompted, for example `output-Set1.txt`. The script prints the number of detected events and the average frequency and Poisson uncertainty for each of the twelve molecule IDs.
 
-**Weeks 4–5 — Analyse all ten subsamples and generate plots:**
+**Weeks 4-5 - Analyse all ten subsamples and generate plots:**
 
 ```bash
-python "Week_4.py"
+python "Week_4_5_Complete_Analysis.py"
 ```
 
 This script expects `output-Set1.txt` through `output-Set10.txt`. It prints the per-subsample and combined frequency tables, overall molecule-pair differences, and momentum-dependent bin results, then saves six PNG graphs.
 
-The filenames, momentum range, and number of bins are configured near the top of `Week_4.py` using `FILENAMES`, `MOMENTUM_MIN`, `MOMENTUM_MAX` and `NUMBER_OF_BINS`.
+The filenames, momentum range, and number of bins are configured near the top of `Week_4_5_Complete_Analysis.py` using `FILENAMES`, `MOMENTUM_MIN`, `MOMENTUM_MAX` and `NUMBER_OF_BINS`.
 
-**Status of the uploaded code:** Before relying on the output, correct the event-header parsing in `Week_4.py` and the indentation of the momentum-bin results printing loop. The current Week 3 event counting and Week 2 multi-event parsing also require review. The scripts have not been verified against the complete input dataset in this README.
 
 ## Program output
 
@@ -480,7 +479,7 @@ The project produces the following outputs:
 
 1. A Week 2 console table displaying molecule IDs and their momentum magnitudes.
 2. A Week 3 table showing average molecule frequencies and Poisson uncertainties for a selected input file.
-3. Week 4 tables containing individual subsample frequencies, combined averages, statistical uncertainties and overall molecule-pair differences.
+3. Week 4 tables containing individual subsample frequencies, combined averages, statistical uncertainties, and overall molecule-pair differences.
 4. Six Week 5 momentum-dependent asymmetry plots, one for each molecule pair.
 5. CSV files containing the numerical results of the subsampling and momentum-dependent analyses.
 
@@ -514,9 +513,9 @@ The six generated PNG plots are stored in the `Plots/` directory and displayed i
 
 ## Reproducibility and future improvements
 
-The project includes Python scripts, numerical CSV outputs and momentum-dependent asymmetry plots to support reproducibility.
+The project includes Python scripts, numerical CSV outputs, and momentum-dependent asymmetry plots to support reproducibility.
 
-To reproduce the analysis, the same input datasets, molecule IDs, event-counting method and momentum-bin settings should be used. The exported CSV files allow the individual subsample results and final calculated values to be checked independently.
+To reproduce the analysis, the same input datasets, molecule IDs, event-counting method, and momentum-bin settings should be used. The exported CSV files allow the individual subsample results and final calculated values to be checked independently.
 
 Possible future improvements include implementing automated tests for data parsing and statistical calculations, introducing configurable input and output directories, and extending the analysis to additional molecule species or momentum ranges.
 

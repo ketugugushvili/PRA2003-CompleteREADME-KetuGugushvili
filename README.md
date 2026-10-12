@@ -159,17 +159,17 @@ $$
    - `|difference| / uncertainty` (in this file, this ratio will be referenced as significance) 
 
 $$
-\sigma_D =\frac{|\bar D|}{SD}.
+\sigma =\frac{|\bar D|}{SD}.
 $$
 
 * This ratio represents how large the observed difference is compared to the statistical variation between the subsamples. 
 * A larger ratio means that the observed difference is large compared with the subsample spread, therefore significant.
    - This ratio was used in this analysis as a descriptive measure to support the asymmetry comparison:
-     - 1\sigma_D: 1 in 6 chance the result is caused by fluctuations
-     - 2\sigma_D: 1 in 44 chance
-     - 3\sigma_D: correspond to a 1-in-740 chance of a statistical quirk
-     - 4\sigma_D: corresponds to a 1-in-32,000 chance
-     - 5\sigma_D: is a 1-in-3.5 million chance
+     - 1\sigma : 1 in 6 chance the result is caused by fluctuations
+     - 2\sigma : 1 in 44 chance
+     - 3\sigma : correspond to a 1-in-740 chance of a statistical quirk
+     - 4\sigma : corresponds to a 1-in-32,000 chance
+     - 5\sigma : is a 1-in-3.5 million chance
 
 ### Week 5 Deliverables: Momentum-dependent asymmetry 
 
@@ -255,9 +255,9 @@ The results obtained from the complete sample are:
 The average difference is: `0.03229671 ± 0.00451870`
 
 The difference is approximately 7.15 times the statistical uncertainty. 
---> Thus, the observed difference is significant due to how large it 
+  -> Thus, the observed difference is significant due to how large it 
 is relative to the statistical variation between the sub-samples.
-----> The results provide evidence of an asymmetry between 211 and -211.
+  -> The results provide evidence of an asymmetry between 211 and -211.
 
 
 ##### 321 vs -321
@@ -265,9 +265,9 @@ is relative to the statistical variation between the sub-samples.
 The average difference is: `0.00569100 ± 0.00329367`
 
 The difference is approximately 1.73 times the statistical uncertainty.
---> Thus, the difference is not significantly large compared with the 
+  -> Thus, the difference is not significantly large compared with the 
 statistical variation between the sub-samples. 
-----> The evidence doesn't support an asymmetry between 321 and -321 completely.
+  -> The evidence doesn't support an asymmetry between 321 and -321 completely.
 
 
 ##### 2212 vs -2212
@@ -275,8 +275,8 @@ statistical variation between the sub-samples.
 The average difference is: `0.02387314 ± 0.00237277`
 
 The difference is approximately 10.06 times the statistical uncertainty.
---> The observed difference is much larger than the statistical variation. 
-----> The results provide evidence of an asymmetry between 2212 and -2212.
+  -> The observed difference is much larger than the statistical variation. 
+  -> The results provide evidence of an asymmetry between 2212 and -2212.
 
 
 ##### 3122 vs -3122
@@ -284,8 +284,8 @@ The difference is approximately 10.06 times the statistical uncertainty.
 The average difference is: `0.00490256 ± 0.00058316`
 
 The difference is approximately 8.41 times the statistical uncertainty.
---> The difference is significantly large compared with the statistical variation.
-----> The results provide evidence of an asymmetry between 3122 and -3122.
+  -> The difference is significantly large compared with the statistical variation.
+  -> The results provide evidence of an asymmetry between 3122 and -3122.
 
 
 ##### 3312 vs -3312
@@ -293,8 +293,8 @@ The difference is approximately 8.41 times the statistical uncertainty.
 The average difference is: `0.00044067 ± 0.00048793`
 
 The difference is approximately 0.90 times the statistical uncertainty.
---> The difference is way too small relative to the statistical variation.   
-----> There is no evidence of an asymmetry between 3312 and -3312.
+  -> The difference is way too small relative to the statistical variation.   
+  -> There is no evidence of an asymmetry between 3312 and -3312.
 
 
 ##### 3334 vs -3334
@@ -302,30 +302,30 @@ The difference is approximately 0.90 times the statistical uncertainty.
 The average difference is: `0.00003551 ± 0.00006854`
 
 The difference is approximately 0.52 times the statistical uncertainty.
---> The difference is smaller than its uncertainty.
-----> There is no evidence of an asymmetry between 3334 and -3334.
+  -> The difference is smaller than its uncertainty.
+  -> There is no evidence of an asymmetry between 3334 and -3334.
 
 ### Week 5: Momentum-Dependent Asymmetry
 
 #### 211 vs -211: Carbon monoxide and Carbon-13 monoxide
 
-<img src="Plots/momentum_asymmetry_211_-211.png" alt="Description of image" width="400">
+<img src="Plots/momentum_asymmetry_211_-211.png" alt="Description of image" width="600">
 
 #### 321 vs -321: Nitric Oxide and ionised NO
 
-<img src="Plots/momentum_asymmetry_321_-321.png" alt="Description of image" width="400">
+<img src="Plots/momentum_asymmetry_321_-321.png" alt="Description of image" width="600">
 
 #### 2212 vs -2212: Water and heavy water 
 
-<img src="Plots/momentum_asymmetry_2212_-2212.png" alt="Description of image" width="400">
+<img src="Plots/momentum_asymmetry_2212_-2212.png" alt="Description of image" width="600">
 
 #### 3122 vs -3122: Methane and methyl ion
 
-<img src="Plots/momentum_asymmetry_3122_-3122.png" alt="Description of image" width="400">
+<img src="Plots/momentum_asymmetry_3122_-3122.png" alt="Description of image" width="600">
 
 #### 3312 vs -3312: Ethylene and ionised ethylene
 
-<img src="Plots/momentum_asymmetry_3312_-3312.png" alt="Description of image" width="400">
+<img src="Plots/momentum_asymmetry_3312_-3312.png" alt="Description of image" width="600">
 
 #### 3334 vs -3334: Ozone  and superoxide anion 
 

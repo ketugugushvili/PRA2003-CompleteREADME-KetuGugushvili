@@ -380,7 +380,7 @@ The supplied plots suggest that momentum matters most for 211/-211 and 2212/-221
 
 ## Repository structure
 
-
+```text
 PRA2003-project/
 ├── README.md
 ├── Week_2_Momentum.py
@@ -408,7 +408,7 @@ PRA2003-project/
 │   └── momentum_3334_-3334.csv
 │
 └── output-Set*.txt
-
+```
 
 Large course-provided data files are excluded from the public repository. Obtain them through the course and place them in the working directory before running the scripts.
 

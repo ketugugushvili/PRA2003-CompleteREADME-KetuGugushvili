@@ -17,7 +17,7 @@
   - event ID: ID of the experiment or simulation run
   - number of molecules tracked: Total number of molecules observed in this run 
 * Each row after the header gives:
-  - 3D momentum components (px, py, pz in 10^(-23)kg m/s)
+  - 3D momentum components (px, py, pz in $10^-23$ kg m/s)
   - an integer ID representing the molecule or isotope 
 
 ```text

@@ -179,7 +179,7 @@ $$
 \sigma =\frac{|\bar D|}{SD}.
 $$
 
-* This ratio represents how large the observed difference is compared to the statistical variation between the subsamples. 
+* The ratio represents how large the observed difference is compared to the statistical variation between the subsamples. 
 * A larger ratio means that the observed difference is large compared with the subsample spread, therefore significant.
    - This ratio was used in this analysis as a descriptive measure to support the asymmetry comparison:
      - $1\sigma$: 1 in 6 chance the result is caused by fluctuations
@@ -226,16 +226,16 @@ $$
 
 * The mean difference plotted on the graph was calculated as the arithmetic mean of these ten differences. The vertical error bar was calculated as their sample standard deviation:
 
-[
+$$
 s_{D,j}=\sqrt{\frac{1}{K-1}\sum_{i=1}^{K}
 (D_{i,j}-\bar D_j)^2}
-]
+$$
 
 where:
-* (D_{i,j}) is the paired frequency difference in subsample (i) and momentum bin (j).
-* (\bar D_j) is the arithmetic mean of the ten differences in bin (j).
+* ($D_{i,j}$) is the paired frequency difference in subsample (i) and momentum bin (j).
+* ($\bar D_j$) is the arithmetic mean of the ten differences in bin (j).
 * (K=10) is the number of subsamples.
-* (s_{D,j}) is the sample standard deviation for bin (j).
+* ($s_{D,j$}) is the sample standard deviation for bin (j).
 
 In Python, this is calculated using np.std(subsample_differences, axis=0, ddof=1), where axis=0 calculates the standard deviation across the ten subsamples independently for each momentum bin.
 * The vertical error bars therefore show how much the paired frequency difference varies between subsamples in each bin.

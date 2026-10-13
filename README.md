@@ -407,7 +407,7 @@ PRA2003-project/
 │   ├── momentum_3312_-3312.csv
 │   └── momentum_3334_-3334.csv
 │
-└── output-Set*.txt   # Course data, if permitted
+└── output-Set*.txt
 
 
 

@@ -235,7 +235,7 @@ where:
 * ($D_{i,j}$) is the paired frequency difference in subsample (i) and momentum bin (j).
 * ($\bar D_j$) is the arithmetic mean of the ten differences in bin (j).
 * (K=10) is the number of subsamples.
-* ($s_{D,j$}) is the sample standard deviation for bin (j).
+* ($s_{D,j}$) is the sample standard deviation for bin (j).
 
 In Python, this is calculated using np.std(subsample_differences, axis=0, ddof=1), where axis=0 calculates the standard deviation across the ten subsamples independently for each momentum bin.
 * The vertical error bars therefore show how much the paired frequency difference varies between subsamples in each bin.

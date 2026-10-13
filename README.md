@@ -112,7 +112,7 @@ The results for each of the 12 molecule IDs are displayed in the output table.
 
 **File:** `Week_4_5_Complete_Analysis.py` (also includes the Week 5 analysis)
 
-The Week 4 code calculates the average number of each of the 12 molecule IDs per event. The entire sample of the 10 files is analysed as sub-samples separately, and assigned statistical uncertainty from the spread of the results.  
+The Week 4 code calculates the average number of each of the 12 molecule IDs per event. The entire sample of the 10 files is analysed as sub-samples separately, and statistical uncertainty is assigned from the spread of the results.  
 
 The analysis also questions whether there is evidence of an asymmetry between each molecule pair by calculating their mean differences:
 - 211 and -211
@@ -142,14 +142,14 @@ $$
 * Then, statistical uncertainty is calculated as the **sample standard deviation**, representing the spread of these results with `np.std(values, ddof=1)`:
   
 $$
-s_m = \sqrt{\frac{1}{K-1}\sum_{i=1}^{K}\left(\bar N_{m,i}-\langle\bar N_m\rangle\right)^2}.
+SD = \sqrt{\frac{1}{K-1}\sum_{i=1}^{K}\left(\bar N_{m,i}-\langle\bar N_m\rangle\right)^2}.
 $$
 
 where:
 * (K=10) is the number of subsamples.
-* (\bar N_{m,i}) is the average frequency of molecule (m) in subsample (i).
-* (\bar N_{m,\mathrm{unweighted}}) is the arithmetic mean of the ten subsample averages.
-* (s_m) is the sample standard deviation of the ten average frequencies.
+* ($\bar N_{m,i}$) is the average frequency of molecule (m) in subsample (i).
+* ($\bar N_{m,\mathrm{unweighted}}$) is the arithmetic mean of the ten subsample averages.
+* (SD) is the sample standard deviation of the ten average frequencies.
 
 In Python, the uncertainty is calculated using np.std(values, ddof=1). The parameter ddof=1 applies the sample standard deviation formula, dividing the sum of squared deviations by (K-1) rather than (K).
 

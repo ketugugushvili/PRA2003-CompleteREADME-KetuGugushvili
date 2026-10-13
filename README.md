@@ -38,17 +38,17 @@ The table below displays molecule types that are going to be analysed and their 
 | Molecule ID | Molecule type            |
 |-------------|--------------------------|
 | 211         | Carbon monoxide          |
-| -211        | Carbon$^{-13}$ monoxide       |
+| -211        | $Carbon^{-13}$ monoxide       |
 | 321         | Nitric oxide             |
 | -321        | Ionised NO               |
 | 2212        | Water                    | 
-| -2212       | Heavy water (D$_2$O)        |
-| 3122        | Methane (CH$_4$)            |
-| -3122       | Methyl ion (CH$^{3-}$)        |
+| -2212       | Heavy water ($D_2O$)        |
+| 3122        | Methane ($CH_4$)            |
+| -3122       | Methyl ion ($CH^{3-}$)        |
 | 3312        | Ethylene ($C_2H_4$)          |
 | -3312       | Ionised ethylene ($C_2H^{3-}$) |
-| 3334        | Ozone (O$_3$)               |
-| -3334       | Superoxide anion (O$^{2-}$)   |
+| 3334        | Ozone ($O_3$)               |
+| -3334       | Superoxide anion ($O^{2-}$)   |
 
 For the subsampling analysis, the average number of molecules per event is calculated using nonempty events only. Events without molecule records are excluded from the event count, following the event-counting method used in the analysis code. Therefore, the reported averages represent frequencies per nonempty event rather than per every generated simulation event.
 

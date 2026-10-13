@@ -106,7 +106,7 @@ For example, if a molecule appears 1,000 times across 100 analysed events, its a
 
 This approach estimates uncertainty from the total molecule count. In the following weeks, subsampling is introduced to estimate uncertainty from the variation between independent subsets of the simulation data.
 
-The results for each of the 12 molecule IDs are displayed in the table. 
+The results for each of the 12 molecule IDs are displayed in the output table. 
 
 ### Week 4: Subsampling and overall molecule-pair asymmetry 
 
@@ -374,9 +374,11 @@ The average difference is: `0.00003551 ± 0.00006854`
 | 3312 vs -3312 | Very small differences, mostly consistent with zero within plotted spread | No clear momentum-dependent asymmetry |
 | 3334 vs -3334 | Tiny differences of mixed sign with large relative spread | No clear momentum-dependent asymmetry |
 
+## Conclusion 
+
+The supplied plots suggest that momentum matters most for 211/-211 and 2212/-2212, whose positive frequency differences are concentrated at low momentum and decrease as momentum rises. A similar but less clear pattern is visible for 3122/-3122. The remaining pairs show differences that are small compared with their subsample variation. These are descriptive observations from the graphs, not formal tests of momentum dependence.
 
 ## Repository structure
-
 
 PRA2003-project/
 ├── README.md
@@ -407,7 +409,7 @@ PRA2003-project/
 └── output-Set*.txt
 
 
-Large course-provided data files may be excluded from the public repository. In that case, obtain them through the course and place them in the working directory before running the scripts.
+Large course-provided data files are excluded from the public repository. Obtain them through the course and place them in the working directory before running the scripts.
 
 ## Requirements and installation
 
@@ -446,7 +448,7 @@ Place the required `.txt` files alongside the scripts, or adjust the filenames i
 
 Run the scripts from the project directory in the order corresponding to the weekly work.
 
-**Week 2 - Calculate molecule momentum:**
+**Week 2: Calculate molecule momentum:**
 
 ```bash
 python "Week_2_Momentum.py"
@@ -454,7 +456,7 @@ python "Week_2_Momentum.py"
 
 The script reads `output-Set0.txt` and prints molecule IDs and momentum magnitudes.
 
-**Week 3 - Analyse one file:**
+**Week 3: Analyse one file:**
 
 ```bash
 python "Week_3_Molecule_Frequencies.py"
@@ -462,7 +464,7 @@ python "Week_3_Molecule_Frequencies.py"
 
 Enter the input filename when prompted, for example `output-Set1.txt`. The script prints the number of detected events and the average frequency and Poisson uncertainty for each of the twelve molecule IDs.
 
-**Weeks 4-5 - Analyse all ten subsamples and generate plots:**
+**Weeks 4-5: Analyse all ten subsamples and generate plots:**
 
 ```bash
 python "Week_4_5_Complete_Analysis.py"
@@ -503,10 +505,8 @@ The six generated PNG plots are stored in the `Plots/` directory and displayed i
 
 - The subsampling analysis uses nonempty events only when calculating average molecule frequencies. Events without molecule records are excluded from the denominator.
 - Week 3 uses Poisson counting uncertainty, assuming the molecule counts follow Poisson statistics.
-- Weeks 4–5 use the sample standard deviation across ten subsamples to quantify statistical variation. This is not equivalent to the standard error of the combined mean.
+- Weeks 4–5 use the sample standard deviation across ten subsamples to quantify statistical uncertainty.
 - Overall molecule-pair differences are calculated within each subsample before combining the results, preserving the paired structure of the data.
-- The difference-to-uncertainty ratios are descriptive comparisons and are not interpreted as formal Gaussian significance levels.
-- Week 4 uses event-weighted averages, whereas Week 5 uses equally weighted averages across subsamples. This distinction matters if the subsamples contain different numbers of events.
 - Molecules outside the selected momentum range are excluded from the momentum-dependent analysis.
 - The momentum units and bin settings should be consistent with the original simulation dataset.
 - The numerical results and plots can be inspected using the CSV and PNG files included in the repository.

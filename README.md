@@ -17,7 +17,7 @@
   - event ID: ID of the experiment or simulation run
   - number of molecules tracked: Total number of molecules observed in this run 
 * Each row after the header gives:
-  - 3D momentum components (px, py, pz in $10^(-23)$ kg m/s)
+  - 3D momentum components (px, py, pz in $10^{-23}$ kg m/s)
   - an integer ID representing the molecule or isotope 
 
 ```text
@@ -38,17 +38,17 @@ The table below displays molecule types that are going to be analysed and their 
 | Molecule ID | Molecule type            |
 |-------------|--------------------------|
 | 211         | Carbon monoxide          |
-| -211        | Carbon-13 monoxide       |
+| -211        | Carbon$^{-13}$ monoxide       |
 | 321         | Nitric oxide             |
 | -321        | Ionised NO               |
 | 2212        | Water                    | 
-| -2212       | Heavy water (D2O)        |
-| 3122        | Methane (CH4)            |
-| -3122       | Methyl ion (CH3-)        |
-| 3312        | Ethylene (C2H4)          |
-| -3312       | Ionised ethylene (C2H3-) |
-| 3334        | Ozone (O3)               |
-| -3334       | Superoxide anion (O2-)   |
+| -2212       | Heavy water (D$_2$O)        |
+| 3122        | Methane (CH$_4$)            |
+| -3122       | Methyl ion (CH$^{3-}$)        |
+| 3312        | Ethylene ($C_2H_4$)          |
+| -3312       | Ionised ethylene ($C_2H^{3-}$) |
+| 3334        | Ozone (O$_3$)               |
+| -3334       | Superoxide anion (O$^{2-}$)   |
 
 For the subsampling analysis, the average number of molecules per event is calculated using nonempty events only. Events without molecule records are excluded from the event count, following the event-counting method used in the analysis code. Therefore, the reported averages represent frequencies per nonempty event rather than per every generated simulation event.
 
